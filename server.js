@@ -1,10 +1,13 @@
 const express = require('express');
 const { animals } = require('./data/animals.json');
+// heroku apps get served on using port 80, and saves it in an environmental variable, process.env.PORT
+// here we are using that port for heroku as default, then if not available we use 3001.
+const PORT = process.env.PORT || 3001;
 
 const app = express();
 
-app.listen(3001, ()=>{
-    console.log("API server now on port 3001!");
+app.listen(PORT, ()=>{
+    console.log(`API server now on port ${PORT}!`);
 });
 
 function filterByQuery(query, animalsArray) {
