@@ -1,4 +1,5 @@
 const express = require('express');
+const res = require('express/lib/response');
 const { animals } = require('./data/animals.json');
 // heroku apps get served on using port 80, and saves it in an environmental variable, process.env.PORT
 // here we are using that port for heroku as default, then if not available we use 3001.
@@ -50,10 +51,26 @@ function filterByQuery(query, animalsArray) {
 }
 
 
+function findById(id, animalsArray) {
+    const result = animalsArray.filter(animal => animal.id === id)[0];
+    return result;
+};
+
+
 app.get('/api/animals', (req, res) => {
     let results = animals;
     if (req.query) {
         results = filterByQuery(req.query, results);
     }
     res.json(results);
+});
+
+app.get('/api/animals/:id', (req, res) => {
+    const result = findById(req.params.id, animals);
+    if(result) {
+        res.json(result);
+    }
+    else {
+        res.sendStatus(404);
+    }
 });
