@@ -1,3 +1,7 @@
+// const { response } = require('express');  
+// above line was initially included, but breaks the code when route
+// is finally created. Gave error "Uncaught ReferenceError: require is not defined"
+
 const $animalForm = document.querySelector('#animals-form');
 const $displayArea = document.querySelector('#display-area');
 
@@ -31,6 +35,17 @@ const getAnimals = (formData = {}) => {
 
   console.log(queryUrl);
 
+  fetch(queryUrl)
+    .then(response => {
+      if (!response.ok) {
+        return alert('Error: ' + response.statusText);
+      }
+      return response.json();
+    })
+    .then(animalData => {
+      console.log(animalData);
+      printResults(animalData);
+    });
 };
 
 const handleGetAnimalsSubmit = event => {
