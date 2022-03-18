@@ -10,6 +10,7 @@ const app = express();
 
 // parse incoming string or array data 
 app.use(express.urlencoded({ extended: true }));
+
 // parse incoming JSON data 
 app.use(express.json());
 
@@ -21,6 +22,7 @@ app.use(express.static('public'));
 // the app will use the router we set up in apiRoutes
 // Note must be placed under express.static, or css.styles will not display!
 app.use('/api', apiRoutes);
+
 //  If / is the endpoint, then the router will serve back our HTML routes.
 app.use('/', htmlRoutes);
 
