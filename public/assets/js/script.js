@@ -55,7 +55,7 @@ const handleAnimalFormSubmit = event => {
 
 $animalForm.addEventListener('submit', handleAnimalFormSubmit);
 
-
+// zookeeper form submit POST request 
 const handleZookeeperForm = event => {
   event.preventDefault();
 
@@ -72,9 +72,10 @@ const handleZookeeperForm = event => {
       Accept: 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(zookeeperObj)
+    body: JSON.stringify(zookeeperObj),
   })
     .then(response => {
+      console.log(response);
       if (response.ok) {
         return response.json();
       }
